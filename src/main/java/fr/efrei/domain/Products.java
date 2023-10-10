@@ -1,16 +1,15 @@
 package fr.efrei.domain;
 
 public class Products {
-    private String id; //create class because if a package is empty, its not pushed in Git
+    private String id;
     private String description;
     private double price;
 
-    private Products ()
-    {
-        //constructor
+    private Products() {
+        // Default constructor is private
     }
 
-    private Product (Builder builder){
+    private Products(Builder builder) {
         this.id = builder.id;
         this.description = builder.description;
         this.price = builder.price;
@@ -30,26 +29,35 @@ public class Products {
 
     @Override
     public String toString() {
-        return "Products{" +
+        return "Product{" +
                 "id='" + id + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 '}';
     }
 
-    public Builder setPrice(double price){
-        this.price = price;
-        return this;
-    }
+    public static class Builder {
+        private String id;
+        private String description;
+        private double price;
 
-    public Builder copy (Products product){
-        this.id = product.id;
-        this.description = product.description;
-        this.price = product.price;
-        return builder;
-    }
+        public Builder setId(String id) {
+            this.id = id;
+            return this;
+        }
 
-    public Product build (){
-        return new Product(this);
+        public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder setPrice(double price) {
+            this.price = price;
+            return this;
+        }
+
+        public Products build() {
+            return new Products(this);
+        }
     }
 }
